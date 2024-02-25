@@ -5,7 +5,10 @@
   "author": "Hiaguedes <hiagorguedes@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "test": "jest"
+    "test": "jest --passWithNoTests",
+    "test:watch": "yarn test -- --watch",
+    "test:ci": "yarn test -- --coverage",
+    "test:staged": "yarn test -- --findRelatedTests"
   },
   "devDependencies": {
     "@types/jest": "^29.5.12",
