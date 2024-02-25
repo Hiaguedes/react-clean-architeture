@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker'
 import { RemoteAuthentication } from ".";
-import { HttpClassSpy } from '../../../../data/protocols/http/HttpPostClient/mock';
-import { mockAuthentication } from '../../../../domain/authenticator/mock';
+import { HttpClassSpy } from '@src/data/protocols/http/HttpPostClient/mock';
+import { mockAuthentication } from '@src/domain/authenticator/mock';
 
 const makeSut = (url = 'fake_url') => {
     const httpClient = new HttpClassSpy();

@@ -16,7 +16,10 @@
       "skipLibCheck": true,
       "strict": true,
       "baseUrl": "src",
-      "rootDir": "src"
+      "rootDir": "src",
+      "paths": {
+        "@src/*": ["*"]
+      }
     },
     "include": [
         "src"
