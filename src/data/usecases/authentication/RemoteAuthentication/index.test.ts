@@ -2,8 +2,8 @@ import { faker } from '@faker-js/faker'
 import { RemoteAuthentication } from ".";
 import { HttpClassSpy } from '@src/data/protocols/http/HttpPostClient/mock';
 import { mockAuthentication } from '@src/domain/authenticator/mock';
-import { InvalidCredentialsError } from '@src/domain/errors/InvalidCredentialsError';
 import { HttpStatusCode } from '@src/data/protocols/http/httpResponse';
+import { UnexpectedError, InvalidCredentialsError } from '@src/domain/errors';
 
 const makeSut = (url = 'fake_url') => {
     const httpClient = new HttpClassSpy();
@@ -48,5 +48,38 @@ describe('RemoteAuthentication', () => {
 
         expect(promise).rejects.toThrow(new InvalidCredentialsError())
 
+    })
+
+    test('should throw unexpected error if httpClient return 400', () => {
+        const { httpClient, sut } = makeSut();
+
+        httpClient.response = {
+            statusCode: HttpStatusCode.badRequest,
+        }
+        const promise = sut.auth(mockAuthentication);
+
+        expect(promise).rejects.toThrow(new UnexpectedError())
+    })
+
+    test('should throw unexpected error if httpClient return 500', () => {
+        const { httpClient, sut } = makeSut();
+
+        httpClient.response = {
+            statusCode: HttpStatusCode.serverError,
+        }
+        const promise = sut.auth(mockAuthentication);
+
+        expect(promise).rejects.toThrow(new UnexpectedError())
+    })
+
+    test('should throw unexpected error if httpClient return 404', () => {
+        const { httpClient, sut } = makeSut();
+
+        httpClient.response = {
+            statusCode: HttpStatusCode.notFound,
+        }
+        const promise = sut.auth(mockAuthentication);
+
+        expect(promise).rejects.toThrow(new UnexpectedError())
     })
 })
