@@ -11,7 +11,9 @@ export class RemoteAuthentication implements Authentication {
     async auth(params: { email: string; password: string; }): Promise<AccountModel> {
         console.log(params)
 
-        await this.httpClient.post(this.url);
+        await this.httpClient.post({
+            url: this.url,
+        });
 
         return Promise.resolve({
             accessToken: '11111111'
