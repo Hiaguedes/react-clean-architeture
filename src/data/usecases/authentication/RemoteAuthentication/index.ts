@@ -7,7 +7,7 @@ import { UnexpectedError, InvalidCredentialsError } from "@src/domain/errors";
 export class RemoteAuthentication implements Authentication {
     constructor (
         private readonly url: string,
-        private readonly httpClient: HttpPostClient
+        private readonly httpClient: HttpPostClient<AuthenticationParams, AccountModel>
         ) {}
 
     async auth(params: AuthenticationParams): Promise<AccountModel> {
@@ -26,7 +26,7 @@ export class RemoteAuthentication implements Authentication {
         }
 
         return Promise.resolve({
-            accessToken: '11111111'
+            accessToken: '11111111',
         })
     }
 }

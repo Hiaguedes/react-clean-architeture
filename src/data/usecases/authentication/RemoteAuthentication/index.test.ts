@@ -4,9 +4,11 @@ import { HttpClassSpy } from '@src/data/protocols/http/HttpPostClient/mock';
 import { mockAuthentication } from '@src/domain/authenticator/mock';
 import { HttpStatusCode } from '@src/data/protocols/http/httpResponse';
 import { UnexpectedError, InvalidCredentialsError } from '@src/domain/errors';
+import { AuthenticationParams } from '@src/domain/authenticator/authenticator';
+import { AccountModel } from '@src/domain/models/AccountModel';
 
 const makeSut = (url = 'fake_url') => {
-    const httpClient = new HttpClassSpy();
+    const httpClient = new HttpClassSpy<AuthenticationParams, AccountModel>();
     const AuthenticationSUT = new RemoteAuthentication(url, httpClient);
 
     return {
