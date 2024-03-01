@@ -4,9 +4,10 @@ import axios from 'axios';
 export class AxiosHttpClient<T, R> implements HttpPostClient<T, R> {
 
     async post(params: HttpPostParams<T>): Promise<HttpResponse<R>> {
-        await axios.post(params.url, params.body)
+        const response = await axios.post(params.url, params.body)
         return {
-            statusCode: 200,
+            statusCode: response.status,
+            body: response.data,
         }
     }
 
