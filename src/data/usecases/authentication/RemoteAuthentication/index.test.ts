@@ -3,7 +3,7 @@ import { RemoteAuthentication } from ".";
 import { HttpClassSpy , HttpStatusCode} from '@src/data/protocols/http';
 import { mockAuthentication } from '@src/domain/authenticator/mock';
 import { UnexpectedError, InvalidCredentialsError } from '@src/domain/errors';
-import { AuthenticationParams } from '@src/domain/authenticator/authenticator';
+import { AuthenticationParams } from '@src/domain/authenticator';
 import { AccountModel } from '@src/domain/models/AccountModel';
 import { mockAccountModel } from '@src/domain/test/mockAccountModel';
 

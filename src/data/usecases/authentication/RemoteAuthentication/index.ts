@@ -1,4 +1,4 @@
-import { Authentication, AuthenticationParams } from "@src/domain/authenticator/authenticator";
+import { Authentication, AuthenticationParams } from "@src/domain/authenticator";
 import { AccountModel } from "@src/domain/models/AccountModel";
 import { HttpPostClient, HttpStatusCode } from "@src/data/protocols/http";
 import { UnexpectedError, InvalidCredentialsError } from "@src/domain/errors";
