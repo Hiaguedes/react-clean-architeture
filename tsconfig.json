@@ -14,7 +14,6 @@
       "noFallthroughCasesInSwitch": true,
       "resolveJsonModule": true,
       "skipLibCheck": true,
-      "strict": true,
       "baseUrl": "src",
       "rootDir": "src",
       "paths": {

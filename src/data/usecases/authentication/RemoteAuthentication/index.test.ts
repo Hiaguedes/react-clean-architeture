@@ -6,6 +6,7 @@ import { HttpStatusCode } from '@src/data/protocols/http/httpResponse';
 import { UnexpectedError, InvalidCredentialsError } from '@src/domain/errors';
 import { AuthenticationParams } from '@src/domain/authenticator/authenticator';
 import { AccountModel } from '@src/domain/models/AccountModel';
+import { mockAccountModel } from '@src/domain/test/mockAccountModel';
 
 const makeSut = (url = 'fake_url') => {
     const httpClient = new HttpClassSpy<AuthenticationParams, AccountModel>();
@@ -83,5 +84,19 @@ describe('RemoteAuthentication', () => {
         const promise = sut.auth(mockAuthentication);
 
         expect(promise).rejects.toThrow(new UnexpectedError())
+    })
+
+    test('should return accontModel if httpClient return 200', async () => {
+        const { httpClient, sut } = makeSut();
+
+        const httpResult = mockAccountModel;
+
+        httpClient.response = {
+            statusCode: HttpStatusCode.ok,
+            body: mockAccountModel
+        }
+        const account = await sut.auth(mockAuthentication);
+
+        expect(account).toEqual(httpResult)
     })
 })
