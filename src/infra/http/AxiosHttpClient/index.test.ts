@@ -24,6 +24,22 @@ describe('AxiosHttpClient', () => {
             url,
         })
 
-        expect(mockedAxios.post).toHaveBeenCalledWith(url)
+        expect(mockedAxios.post).toHaveBeenCalledWith(url, undefined)
+    })
+
+    test('should call axios with correct body', async () => {
+        
+        const { sut, url } = AxiosSut();
+        const mockBody = {
+            prop1: faker.animal.bear(),
+            prop2: faker.internet.exampleEmail(),
+        }
+
+        sut.post({
+            url,
+            body: mockBody
+        })
+
+        expect(mockedAxios.post).toHaveBeenCalledWith(url, mockBody)
     })
 })
