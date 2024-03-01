@@ -1,10 +1,10 @@
 import { HttpPostClient, HttpPostParams, HttpResponse } from "@src/data/protocols/http";
 import axios from 'axios';
 
-export class AxiosHttpClient implements HttpPostClient<any, void> {
+export class AxiosHttpClient<T, R> implements HttpPostClient<T, R> {
 
-    async post(params: HttpPostParams<any>): Promise<HttpResponse<void>> {
-        await axios(params.url)
+    async post(params: HttpPostParams<T>): Promise<HttpResponse<R>> {
+        await axios.post(params.url)
         return {
             statusCode: 200,
         }
